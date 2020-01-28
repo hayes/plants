@@ -11,6 +11,7 @@ import webpackConfig from '../webpack.config';
 const devApp = express();
 const compiler = webpack({
   ...webpackConfig,
+  devtool: 'inline-source-map',
   mode: 'development',
 });
 
