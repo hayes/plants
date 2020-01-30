@@ -9,8 +9,11 @@ input CreatePlantInput {
 }
 
 type Mutation {
+  createNote(plantId: ID!, note: String!): Note!
+  deleteNote(id: ID!): Note!
   createPlant(plant: CreatePlantInput): Plant!
   updatePlant(id: ID!, plant: UpdatePlantInput): Plant!
+  deletePlant(id: ID!): Plant!
 }
 
 type Note {

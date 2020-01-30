@@ -46,7 +46,7 @@ watcher.on('ready', () => {
     path.resolve(__dirname, '../src/server');
     console.log('Clearing /src/server/ module cache from server');
     Object.keys(require.cache).forEach(id => {
-      if (id.startsWith(path.resolve(__dirname, '../src/server'))) {
+      if (id.startsWith(path.resolve(__dirname, '../src/server')) || id.startsWith(__dirname) {
         delete require.cache[id];
       }
     });

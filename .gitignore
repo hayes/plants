@@ -21,6 +21,8 @@ dist/
 
 
 # Custom
+src/types/graphql.d.ts
+src/client/graphql.ts
 
 # Configs
 .babelrc
