@@ -1,0 +1,15 @@
+query getPlants {
+  plants {
+    id
+    commonName
+    latinName
+    location
+    acquiredAt
+    waterInstructions
+    lightInstructions
+    notes {
+      id
+      note
+    }
+  }
+}

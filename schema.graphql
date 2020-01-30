@@ -1,0 +1,44 @@
+input CreatePlantInput {
+  commonName: String!
+  latinName: String!
+  acquiredAt: String!
+  waterInstructions: String!
+  lightInstructions: String!
+  location: String!
+  notes: [String!]
+}
+
+type Mutation {
+  createPlant(plant: CreatePlantInput): Plant!
+  updatePlant(id: ID!, plant: UpdatePlantInput): Plant!
+}
+
+type Note {
+  id: ID!
+  note: String!
+}
+
+type Plant {
+  id: ID!
+  commonName: String!
+  latinName: String!
+  waterInstructions: String!
+  lightInstructions: String!
+  acquiredAt: String!
+  location: String!
+  notes: [Note!]!
+}
+
+type Query {
+  plants: [Plant!]!
+}
+
+input UpdatePlantInput {
+  commonName: String
+  latinName: String
+  acquiredAt: String
+  waterInstructions: String
+  lightInstructions: String
+  location: String
+  notes: [String!]
+}

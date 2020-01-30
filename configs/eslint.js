@@ -3,6 +3,9 @@ module.exports = {
     browser: true,
     node: true,
   },
+  rules: {
+    'import/prefer-default-export': 'off',
+  },
   overrides: [
     {
       files: ['scripts/**/*'],

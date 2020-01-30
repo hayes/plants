@@ -1,25 +1,19 @@
-import SchemaBuilder from '@giraphql/core';
 import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
-
-const builder = new SchemaBuilder();
-const Query = builder.createQueryType({
-  shape: t => ({
-    hello: t.string({
-      args: {
-        name: t.arg.string(),
-      },
-      resolve: (parent, { name }) => `hello, ${name ?? 'World!'}`,
-    }),
-  }),
-});
-
-const schema = builder.toSchema([Query]);
+import { PrismaClient } from '@prisma/client';
+import schema from './schema';
 
 const app = express();
 
+const prisma = new PrismaClient();
+
+prisma.connect();
+
 const server = new ApolloServer({
   schema,
+  context: () => ({
+    prisma,
+  }),
 });
 
 server.applyMiddleware({ app });

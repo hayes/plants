@@ -17,6 +17,10 @@ const compiler = webpack({
 
 // load initial version of app
 import('../src/server/app');
+import('./generate').then(({ generateSchemaAndTypes }) => {
+  console.log('generating schema and types');
+  generateSchemaAndTypes();
+});
 
 devApp.use(webpackMiddleware(compiler));
 devApp.use(hotMiddleware(compiler));
@@ -38,7 +42,7 @@ const server = http.createServer(devApp);
 const watcher = chokidar.watch('./src/server');
 
 watcher.on('ready', () => {
-  watcher.on('all', () => {
+  watcher.on('all', async () => {
     path.resolve(__dirname, '../src/server');
     console.log('Clearing /src/server/ module cache from server');
     Object.keys(require.cache).forEach(id => {
@@ -47,6 +51,9 @@ watcher.on('ready', () => {
       }
     });
     import('../src/server/app');
+
+    console.log('re-generating schema and types');
+    (await import('./generate')).generateSchemaAndTypes();
   });
 });
 
